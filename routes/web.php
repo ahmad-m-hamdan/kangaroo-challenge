@@ -1,6 +1,7 @@
 <?php
 
-/*
+use App\Http\Controllers\ListController;/*
+
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -14,3 +15,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/list', [ListController::class, 'index']);
+Route::get('/list/{id}', [ListController::class, 'show']);
