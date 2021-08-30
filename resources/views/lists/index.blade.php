@@ -17,20 +17,23 @@
       <div class="row">
         <div class="col-md-12">
           <h1>List of all available surveys</h1>
+          <p>Type something in the input field to search the table for survey codes and names:</p>
+          <input class="form-control" id="myInput" type="text" placeholder="Search">
+          <br>
           <table class="table table-striped table-dark">
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Code</th>
+                <th scope="col">Code / Name</th>
                 <th scope="col">Link</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="myTable">
               <?php $counter = 1; ?>
           <?php foreach ($data as $key => $value) : ?>
             <tr>
               <th scope="row"><?= $counter ?></th>
-              <td><?= $key ?></td>
+              <td class="survey-code"><?= $key ?></td>
               <td><a href="<?= $value ?>" target="_blank">More Info</a></td>
             </tr>
             <?php $counter++; ?>
@@ -40,5 +43,16 @@
         </div>
       </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+    jQuery(document).ready(function($){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).find('td.survey-code').text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+    </script>
 </body>
 </html>

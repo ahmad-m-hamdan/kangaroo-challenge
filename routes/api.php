@@ -25,7 +25,7 @@ Route::get('list.json', function () {
     $inp = file_get_contents($file);
     $tempArray = json_decode($inp, true);
     if (!array_key_exists($tempArray['survey']['code'], $returnArray)) {
-      $returnArray[$tempArray['survey']['code']] = action([ListController::class, 'show'], ['id' => $tempArray['survey']['code']]);
+      $returnArray[$tempArray['survey']['code'] . ' / ' . $tempArray['survey']['name']] = action([ListController::class, 'show'], ['id' => $tempArray['survey']['code']]);
     }
   }
   return json_encode($returnArray, JSON_UNESCAPED_SLASHES);
