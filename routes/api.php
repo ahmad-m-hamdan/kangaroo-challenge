@@ -24,7 +24,7 @@ Route::get('list.json', function () {
   foreach($files as $file) {
     $inp = file_get_contents($file);
     $tempArray = json_decode($inp, true);
-    if (!array_key_exists($tempArray['survey']['code'], $returnArray)) {
+    if (!array_key_exists($tempArray['survey']['code'], $returnArray)) { //the survey code is new, so add to $returnArray
       $returnArray[$tempArray['survey']['code'] . ' / ' . $tempArray['survey']['name']] = action([ListController::class, 'show'], ['id' => $tempArray['survey']['code']]);
     }
   }
@@ -39,7 +39,7 @@ Route::get('{code}.json', function ($code) {
     $tempArray = json_decode($inp, true);
     array_push($mainArray, $tempArray);
   }
-  
+
   $filteredArray = [];
   foreach ($mainArray as $singleSurvey) {
     if ($singleSurvey['survey']['code'] == $code) {
@@ -47,13 +47,13 @@ Route::get('{code}.json', function ($code) {
     }
   }
 
-  if(!$filteredArray) {
+  if(!$filteredArray) { // no survey submissions are associated with this code, so return an empty array
     return json_encode($filteredArray);
   }
 
   $aggregateAnswers = [];
   foreach ($filteredArray[0]['questions'] as $question) {
-    if ($question['type'] == 'qcm') {
+    if ($question['type'] == 'qcm') { //conditions if type of question is qcm
       $options = [];
       foreach ($question['options'] as $option) {
         $options[$option] = 0;
@@ -63,7 +63,7 @@ Route::get('{code}.json', function ($code) {
         'label' => $question['label'],
         'result' => $options,
       ];
-    } else if ($question['type'] == 'numeric') {
+    } else if ($question['type'] == 'numeric') { //conditions if type of question is numeric
       $aggregateAnswers[] = [
         'type' => $question['type'],
         'label' => $question['label'],
@@ -72,7 +72,7 @@ Route::get('{code}.json', function ($code) {
     }
   }
 
-  foreach ($filteredArray as $singleSurvey) {
+  foreach ($filteredArray as $singleSurvey) { // loop over all submissions with the same code, and complete the aggregation process
     $questionCounter = 0;
     foreach ($singleSurvey['questions'] as $question) {
       if ($question['type'] == 'qcm') {
