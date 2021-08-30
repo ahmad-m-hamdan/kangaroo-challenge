@@ -25,10 +25,10 @@
             <table class="table table-striped table-dark">
               <tbody>
             <?php foreach ($data as $answer) : ?>
-              <?php if ($answer->type == 'qcm'): ?>
               <tr>
-                <td colspan="2" class="text-center"><?= $answer->label ?></td>
+                <td colspan="2" class="text-center"><h2><?= $answer->label ?></h2></td>
               </tr>
+              <?php if ($answer->type == 'qcm'): ?>
               <?php foreach ($answer->result as $key => $value): ?>
               <tr>
                 <td><?= $key ?></td>
@@ -36,9 +36,6 @@
               </tr>
               <?php endforeach; ?>
               <?php elseif ($answer->type == 'numeric'): ?>
-              <tr>
-                <td colspan="2" class="text-center"><?= $answer->label ?></td>
-              </tr>
               <tr>
                 <td>Sum</td>
                 <td><?= $answer->result ?></td>
