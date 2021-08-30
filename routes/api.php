@@ -39,10 +39,7 @@ Route::get('{code}.json', function ($code) {
     $tempArray = json_decode($inp, true);
     array_push($mainArray, $tempArray);
   }
-  $mainArray = json_encode($mainArray);
-  // The above code to be enhanced
-
-  $mainArray = json_decode($mainArray, true);
+  
   $filteredArray = [];
   foreach ($mainArray as $singleSurvey) {
     if ($singleSurvey['survey']['code'] == $code) {

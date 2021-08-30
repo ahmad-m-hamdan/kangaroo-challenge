@@ -17,7 +17,6 @@ class ListController extends Controller
     {
         $request = Request::create('/api/list.json', 'GET');
         $response = Route::dispatch($request);
-        // $response = app()->handle($request);
         $data = json_decode($response->getContent());
 
         return view('lists/index', ['data' => $data]);
@@ -54,7 +53,6 @@ class ListController extends Controller
     {
         $request = Request::create('/api/'.$id.'.json', 'GET');
         $response = Route::dispatch($request);
-        // $response = app()->handle($request);
         $data = json_decode($response->getContent());
         return view('lists/show', ['data' => $data, 'code' => $id]);
     }
