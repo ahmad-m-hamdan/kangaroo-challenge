@@ -16,32 +16,38 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1>Details for survey: <?= $code ?></h1>
-          <table class="table table-striped table-dark">
-            <tbody>
-          <?php foreach ($data as $answer) : ?>
-            <?php if ($answer->type == 'qcm'): ?>
-            <tr>
-              <td colspan="2" class="text-center"><?= $answer->label ?></td>
-            </tr>
-            <?php foreach ($answer->result as $key => $value): ?>
-            <tr>
-              <td><?= $key ?></td>
-              <td><?= $value ?></td>
-            </tr>
+          <?php if (!$data): ?>
+            <div class="alert alert-danger" role="alert">
+              No information is available for survey code <?= $code ?>
+            </div>
+          <?php else: ?>
+            <h1>Details for survey: <?= $code ?></h1>
+            <table class="table table-striped table-dark">
+              <tbody>
+            <?php foreach ($data as $answer) : ?>
+              <?php if ($answer->type == 'qcm'): ?>
+              <tr>
+                <td colspan="2" class="text-center"><?= $answer->label ?></td>
+              </tr>
+              <?php foreach ($answer->result as $key => $value): ?>
+              <tr>
+                <td><?= $key ?></td>
+                <td><?= $value ?></td>
+              </tr>
+              <?php endforeach; ?>
+              <?php elseif ($answer->type == 'numeric'): ?>
+              <tr>
+                <td colspan="2" class="text-center"><?= $answer->label ?></td>
+              </tr>
+              <tr>
+                <td>Sum</td>
+                <td><?= $answer->result ?></td>
+              </tr>
+              <?php endif; ?>
             <?php endforeach; ?>
-            <?php elseif ($answer->type == 'numeric'): ?>
-            <tr>
-              <td colspan="2" class="text-center"><?= $answer->label ?></td>
-            </tr>
-            <tr>
-              <td>Sum</td>
-              <td><?= $answer->result ?></td>
-            </tr>
-            <?php endif; ?>
-          <?php endforeach; ?>
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          <?php endif; ?>
         </div>
       </div>
     </div>
