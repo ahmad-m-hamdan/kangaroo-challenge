@@ -16,6 +16,15 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active" aria-current="page">Home</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
           <h1>List of all available surveys</h1>
           <p>Type something in the input field to search the table for survey codes and names:</p>
           <input class="form-control" id="myInput" type="text" placeholder="Search">
@@ -34,7 +43,7 @@
             <tr>
               <th scope="row"><?= $counter ?></th>
               <td class="survey-code"><?= $key ?></td>
-              <td><a href="<?= $value ?>" target="_blank">More Info</a></td>
+              <td><a href="<?= $value ?>">More Info</a></td>
             </tr>
             <?php $counter++; ?>
           <?php endforeach; ?>

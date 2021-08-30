@@ -16,6 +16,17 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="<?= route('default') ?>">Home</a></li>
+              <li class="breadcrumb-item"><a href="<?= route('list.index') ?>">Lists</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><?= $code ?></li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
           <?php if (!$data): ?>
             <div class="alert alert-danger" role="alert">
               No information is available for survey code <?= $code ?>

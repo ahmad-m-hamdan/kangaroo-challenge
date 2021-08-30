@@ -15,6 +15,6 @@ use App\Http\Controllers\ListController;/*
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', [ListController::class, 'index']);
-Route::get('/list', [ListController::class, 'index']);
+Route::get('/', [ListController::class, 'index'])->name('default');
+Route::get('/list', [ListController::class, 'index'])->name('list.index');
 Route::get('/list/{id}', [ListController::class, 'show']);
